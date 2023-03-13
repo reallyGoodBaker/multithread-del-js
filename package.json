@@ -1,0 +1,22 @@
+{
+    "name": "multithread-del",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "bin": {
+        "mrmdir": "bin/mrmdir.js"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/reallyGoodBaker/multithread-del-js.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/reallyGoodBaker/multithread-del-js/issues"
+    },
+    "homepage": "https://github.com/reallyGoodBaker/multithread-del-js#readme"
+}
