@@ -37,7 +37,7 @@ function rmPaths() {
     let tasksAssigned = 0
     let workingThreadNums = 0
 
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
         const taskFinished = () => {
             workingThreadNums--
     
@@ -47,14 +47,18 @@ function rmPaths() {
         }
     
         for (let i = 1; i <= cpuNums; i++) {
-            const shouldAssignedAll = Math.ceil(tasksPerThread * i)
-            const shouldAssign = shouldAssignedAll - tasksAssigned
-            const th = cp.fork('./thread_handler.js')
-    
-            workingThreadNums++
-            tasksAssigned += shouldAssign
-            th.send(paths.splice(0, shouldAssign))
-            th.on('exit', taskFinished)
+            try {
+                const shouldAssignedAll = Math.ceil(tasksPerThread * i)
+                const shouldAssign = shouldAssignedAll - tasksAssigned
+                const th = cp.fork(path.join(__dirname, 'thread_handler.js'))
+        
+                workingThreadNums++
+                tasksAssigned += shouldAssign
+                th.send(paths.splice(0, shouldAssign))
+                th.on('exit', taskFinished)
+            } catch (error) {
+                reject(error)
+            }
         }
     })
 }
